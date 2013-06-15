@@ -1,4 +1,24 @@
+/*
+Copyright (c) <year> <copyright holders>
 
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+*/
 #include "StdAfx.h"
 #include "RtfCpp.h"
 #include <iostream>
@@ -924,7 +944,7 @@ int RtfWriter::start_tablerow()
     // Set error flag
     int error = RTF_SUCCESS;
 
-    char tblrw[1024];
+    char tblrw[1024]="";
     // Format table row aligment
     switch (_rtfRowFormat.rowAligment)
     {
@@ -945,7 +965,7 @@ int RtfWriter::start_tablerow()
     }
 
     // Writes RTF table data
-    char rtfText[1024];
+    char rtfText[1024]="";
     sprintf( rtfText, "\n\\trowd\\trgaph115%s\\trleft%d\\trrh%d\\trpaddb%d\\trpaddfb3\\trpaddl%d\\trpaddfl3\\trpaddr%d\\trpaddfr3\\trpaddt%d\\trpaddft3",
         tblrw, _rtfRowFormat.rowLeftMargin, _rtfRowFormat.rowHeight, _rtfRowFormat.marginTop, _rtfRowFormat.marginBottom, _rtfRowFormat.marginLeft, _rtfRowFormat.marginRight );
     if ( fwrite( rtfText, 1, strlen(rtfText), _rtfFile ) < strlen(rtfText) )
@@ -979,7 +999,7 @@ int RtfWriter::start_tablecell(int rightMargin)
     // Set error flag
     int error = RTF_SUCCESS;
 
-    char tblcla[20];
+    char tblcla[20]="";
     // Format table cell text aligment
     switch (_rtfCellFormat.textVerticalAligment)
     {
@@ -1045,7 +1065,7 @@ int RtfWriter::start_tablecell(int rightMargin)
     if ( _rtfCellFormat.borderLeft.border == true )
     {
         // Left cell border
-        char tbclbt[20];
+        char tbclbt[20]="";
         strcpy( tbclbt, "\\clbrdrl" );
 
         char* border = RtfWriter::get_bordername(_rtfCellFormat.borderLeft.BORDERS.borderType);
